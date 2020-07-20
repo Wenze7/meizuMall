@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jojo.dao.ShoppingMapper">
+  <resultMap id="BaseResultMap" type="com.jojo.pojo.Shopping">
+    <id column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="cid" jdbcType="INTEGER" property="cid" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_shopping
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jojo.pojo.Shopping">
+    insert into tb_shopping (sid, uid, pid, 
+      num, cid)
+    values (#{sid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, 
+      #{num,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jojo.pojo.Shopping">
+    update tb_shopping
+    set uid = #{uid,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=INTEGER},
+      num = #{num,jdbcType=INTEGER},
+      cid = #{cid,jdbcType=INTEGER}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select sid, uid, pid, num, cid
+    from tb_shopping
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select sid, uid, pid, num, cid
+    from tb_shopping
+  </select>
+
+  <select id="selectByUid" resultMap="BaseResultMap">
+    select * from tb_shopping where uid = #{uid}
+  </select>
+
+  <select id="selectByCid" resultMap="BaseResultMap">
+    select * from tb_shopping where uid = #{uid}
+  </select>
+
+  <update id="updateShoppingBySID">
+    update tb_shopping set num = #{num} where sid = #{sid}
+  </update>
+
+  <select id="selectByUidAndPid" resultMap="BaseResultMap">
+    select * from tb_shopping where uid = #{uid} and pid = #{pid}
+  </select>
+
+  <delete id="deleteByUid" parameterType="java.lang.Integer">
+    delete from tb_shopping
+    where uid = #{uid,jdbcType=INTEGER}
+  </delete>
+
+</mapper>
